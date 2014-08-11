@@ -18,9 +18,15 @@ DOWNLOADER_MIDDLEWARES = {
     'imdb.middlewares.ProxyMiddleware': 100,
 }
 
-PROXIES = [{'ip_port': '199.190.224.35:8080'},#, 'user_pass': 'username:password'},
-           {'ip_port': '209.166.162.42:8080'},
-           {'ip_port': '23.19.133.100:7808'},]
+PROXIES = [{'ip_port': '204.130.130.197:8080'},
+           {'ip_port': '23.19.133.100:7808'},
+           {'ip_port': '204.12.235.23:8089'},
+           {'ip_port': '8.225.195.209:8080'},
+           {'ip_port': '66.85.131.18:8089'},
+           {'ip_port': '216.189.101.102:7808'},
+           {'ip_port': '23.19.133.100:8089'},
+           {'ip_port': '209.203.212.4:3128'},
+           {'ip_port': '66.85.131.18:7808'}]
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 #USER_AGENT = 'imdb (+http://www.yourdomain.com)'
