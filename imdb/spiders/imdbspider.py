@@ -30,14 +30,4 @@ class ImdbSpider(CrawlSpider):
         movie['rating'] = response.xpath("//div[@class='titlePageSprite star-box-giga-star']/text()").extract()
         movie['genre'] = response.xpath("//div[@class='infobar']/a/span[@class='itemprop']/text()").extract()
 
-        ''' 
-        note: messes up if movie has no lenth specified
-        # clean up length
-        length = response.xpath("//div[@class='infobar']/time/text()").extract()[0]
-        length = length.strip()
-        length_list = []
-        length_list.append(length)
-        movie['length'] = length_list
-        '''
-
         return movie

@@ -10,6 +10,8 @@
 
 BOT_NAME = 'imdb'
 
+AUTOTHROTTLE_ENABLED = True
+
 SPIDER_MODULES = ['imdb.spiders']
 NEWSPIDER_MODULE = 'imdb.spiders'
 
@@ -18,15 +20,17 @@ DOWNLOADER_MIDDLEWARES = {
     'imdb.middlewares.ProxyMiddleware': 100,
 }
 
-PROXIES = [{'ip_port': '204.130.130.197:8080'},
-           {'ip_port': '23.19.133.100:7808'},
-           {'ip_port': '204.12.235.23:8089'},
-           {'ip_port': '8.225.195.209:8080'},
-           {'ip_port': '66.85.131.18:8089'},
-           {'ip_port': '216.189.101.102:7808'},
-           {'ip_port': '23.19.133.100:8089'},
-           {'ip_port': '209.203.212.4:3128'},
-           {'ip_port': '66.85.131.18:7808'}]
+
+PROXIES = [{'ip_port': '155.94.170.171:13228', 'user_pass': 'psyche_haha:scrapescrape'},
+           {'ip_port': '155.94.170.183:13228', 'user_pass': 'psyche_haha:scrapescrape'}]#,
+           #{'ip_port': '155.94.170.205:13228', 'user_pass': 'psyche_haha:scrapescrape'},
+           #{'ip_port': '155.94.170.230:13228', 'user_pass': 'psyche_haha:scrapescrape'},
+           #{'ip_port': '155.94.170.254:13228', 'user_pass': 'psyche_haha:scrapescrape'},
+           #{'ip_port': '155.94.211.70:13228', 'user_pass': 'psyche_haha:scrapescrape'},
+           #{'ip_port': '155.94.211.59:13228', 'user_pass': 'psyche_haha:scrapescrape'},
+           #{'ip_port': '155.94.211.47:13228', 'user_pass': 'psyche_haha:scrapescrape'},
+           #{'ip_port': '155.94.211.12:13228', 'user_pass': 'psyche_haha:scrapescrape'},
+           #{'ip_port': '155.94.211.6:13228', 'user_pass': 'psyche_haha:scrapescrape'}]
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 #USER_AGENT = 'imdb (+http://www.yourdomain.com)'
