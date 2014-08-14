@@ -1,43 +1,29 @@
 from scrapy.contrib.spiders import CrawlSpider, Rule
 from scrapy.contrib.linkextractors import LinkExtractor
 from imdb.items import ImdbItem
-
+from scrapy.http import Request
 
 class ImdbSpider(CrawlSpider):
 
     name = 'imdb'
     allowed_domains = ['imdb.com']
     start_urls = ['http://www.imdb.com/search/title?count=100&title_type=feature&ref_=nv_ch_mm_1']
-    rules = (
-        # follow the next page link
-        Rule(LinkExtractor(allow=['/search/title\?at=0&count=100&sort=moviemeter,asc&start+'])),
 
-        # find all movie links and parse
-        Rule(LinkExtractor(allow=['/title/tt\d+/']), callback='parse_movie')
-        )
-        
 
-    def parse_movie(self, response):
-        movie = ImdbItem()
+    def start_requests(self):
+        for i in range(1000,2001):
+            yield Request("http://www.imdb.com/search/title?at=0&count=100&sort=moviemeter,asc&start=" + str(100*i + 1) + "&title_type=feature", self.parse_movies)
 
-        # put url into list
-        url_list = []
-        url_list.append(response.url)
+    def parse_movies(self, response):
+        movies_list = []
+        for sel in response.xpath("//tr[@class='odd detailed' or @class='even detailed']"):
+            movie = ImdbItem()
+            movie['url'] = sel.xpath("td[@class='title']/a/@href").extract()
+            movie['title'] = sel.xpath("td[@class='title']/a/text()").extract()
+            movie['year'] = sel.xpath("td[@class='title']/span[@class='year_type']/text()").extract()
+            movie['rating'] = sel.xpath("td[@class='title']/div[@class='user_rating']/div/span[@class='rating-rating']/span[@class='value']/text()").extract()
+            movie['genre'] = sel.xpath("td[@class='title']/span[@class='genre']/a/text()").extract()
+            movie['length'] = sel.xpath("td[@class='title']/span[@class='runtime']/text()").extract()
+            movies_list.append(movie)
+        return(movies_list)
 
-        movie['url'] = url_list
-        movie['title'] = response.xpath("//h1/span[@class='itemprop']/text()").extract()
-        movie['year'] = response.xpath("//h1/span[@class='nobr']/a/text()").extract()
-        movie['rating'] = response.xpath("//div[@class='titlePageSprite star-box-giga-star']/text()").extract()
-        movie['genre'] = response.xpath("//div[@class='infobar']/a/span[@class='itemprop']/text()").extract()
-
-        ''' 
-        note: messes up if movie has no lenth specified
-        # clean up length
-        length = response.xpath("//div[@class='infobar']/time/text()").extract()[0]
-        length = length.strip()
-        length_list = []
-        length_list.append(length)
-        movie['length'] = length_list
-        '''
-
-        return movie
