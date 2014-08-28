@@ -13,7 +13,7 @@ BOT_NAME = 'imdb'
 SPIDER_MODULES = ['imdb.spiders']
 NEWSPIDER_MODULE = 'imdb.spiders'
 
-AUTOTHROTTLE_ENABLED = True
+AUTOTHROTTLE_ENABLED = False
 #DOWNLOADER_MIDDLEWARES = {
 #    'scrapy.contrib.downloadermiddleware.httpproxy.HttpProxyMiddleware': 110,
 #    'imdb.middlewares.ProxyMiddleware': 100,

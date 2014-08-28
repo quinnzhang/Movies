@@ -11,6 +11,7 @@ import scrapy
 class ImdbItem(scrapy.Item):
     title = scrapy.Field()
     rating = scrapy.Field()
+    votes = scrapy.Field()
     year = scrapy.Field()
     genre = scrapy.Field()
     tv = scrapy.Field()

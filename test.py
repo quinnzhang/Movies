@@ -1,4 +1,13 @@
 import re
+import json
 
-for i in range (1000,2001):
-	print "http://www.imdb.com/search/title?at=0&count=100&sort=moviemeter,asc&start=" + str(100*i + 1) + "&title_type=feature"
+a = "1234 (a567,89)"
+
+b = re.findall('\((.*?)\)',a)
+c = re.findall('\d+', b[0])
+d = ''.join(c)
+
+print a
+print b
+print c
+print d
